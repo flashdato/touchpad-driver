@@ -25,7 +25,7 @@
 #define RESHUB_USE_HELPER_ROUTINES
 #include <reshub.h>
 
-#define HTP_VERSION_STRING          L"1.1.0"
+#define HTP_VERSION_STRING          L"1.2.0"
 #define HTP_POOL_TAG                'pTxH'
 
 /* Limits */

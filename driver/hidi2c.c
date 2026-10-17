@@ -779,11 +779,10 @@ HtpApplyMouseMode(
     HTP_DESC_INFO* info = &Ctx->DescInfo;
     UCHAR          report[HTP_MAX_SAVED_FEATURE_LEN];
     ULONG          length;
-    ULONG          got = 0;
-    ULONG          bit;
     NTSTATUS       status;
 
     if (!info->HasInputMode) {
+        HtpLog(Ctx, L"mouse mode: no input-mode feature; relying on the chip's power-on default (mouse)");
         return;
     }
 
@@ -792,22 +791,23 @@ HtpApplyMouseMode(
         return;
     }
 
+    /*
+     * Force Device Mode = 0 (mouse) with a single write and NO feature read.
+     * On this chip a feature GET - above all the 256-byte PTP certification
+     * report (report 6) that the Windows precision-touchpad stack reads during
+     * bring-up - hangs the firmware: it keeps answering plain input reads but
+     * NACKs every command until its power is physically cut. That is exactly
+     * why Windows (which runs that certification) kills it and Linux (which
+     * treats it as a multitouch mouse and never reads report 6) does not.
+     * Writing Device Mode 0 is small and safe; the chip already powers on in
+     * mouse mode, so even a failed write is non-fatal.
+     */
     RtlZeroMemory(report, sizeof(report));
     report[0] = info->InputModeReportId;
-    status = HtpGetReport(Ctx, HTP_REPORT_TYPE_FEATURE, info->InputModeReportId, report, length, &got);
-    if (!NT_SUCCESS(status)) {
-        RtlZeroMemory(report, sizeof(report));
-        report[0] = info->InputModeReportId;
-    }
-
-    for (bit = 0; bit < info->InputModeBitSize; bit++) {
-        ULONG position = info->InputModeBitOffset + bit;
-        ULONG index = 1 + position / 8;
-        if (index < length) {
-            report[index] &= (UCHAR)~(1u << (position % 8));
-        }
-    }
-
     status = HtpSetReport(Ctx, HTP_REPORT_TYPE_FEATURE, info->InputModeReportId, report, length);
-    HtpLog(Ctx, L"input mode set to mouse (report %u): 0x%08X", (ULONG)info->InputModeReportId, (ULONG)status);
+    HtpLog(Ctx, L"mouse mode: Device Mode=0 (report %u): 0x%08X", (ULONG)info->InputModeReportId, (ULONG)status);
+
+    /* A failed mode write must not cascade into recovery - the default is mouse anyway. */
+    InterlockedExchange(&Ctx->ConsecutiveFailures, 0);
+    InterlockedExchange(&Ctx->DeviceReady, 1);
 }
