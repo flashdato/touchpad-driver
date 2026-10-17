@@ -1,0 +1,47 @@
+
+FullName                                                                                                Length
+--------                                                                                                ------
+D:\a\touchpad-driver\touchpad-driver\build\obj                                                          
+D:\a\touchpad-driver\touchpad-driver\build\x64                                                          
+D:\a\touchpad-driver\touchpad-driver\build\obj\x64                                                      
+D:\a\touchpad-driver\touchpad-driver\build\obj\x64\Release                                              
+D:\a\touchpad-driver\touchpad-driver\build\obj\x64\Release\htixtp.tlog                                  
+D:\a\touchpad-driver\touchpad-driver\build\obj\x64\Release\descriptor.obj                               58367
+D:\a\touchpad-driver\touchpad-driver\build\obj\x64\Release\diag.obj                                     81928
+D:\a\touchpad-driver\touchpad-driver\build\obj\x64\Release\hidi2c.obj                                   85981
+D:\a\touchpad-driver\touchpad-driver\build\obj\x64\Release\htixtp.Build.CppClean.log                    106
+D:\a\touchpad-driver\touchpad-driver\build\obj\x64\Release\htixtp.inf                                   2947
+D:\a\touchpad-driver\touchpad-driver\build\obj\x64\Release\htixtp.obj                                   125662
+D:\a\touchpad-driver\touchpad-driver\build\obj\x64\Release\htixtp.sys.recipe                            308
+D:\a\touchpad-driver\touchpad-driver\build\obj\x64\Release\vc145.pdb                                    307200
+D:\a\touchpad-driver\touchpad-driver\build\obj\x64\Release\htixtp.tlog\CL.command.1.tlog                8946
+D:\a\touchpad-driver\touchpad-driver\build\obj\x64\Release\htixtp.tlog\Cl.items.tlog                    500
+D:\a\touchpad-driver\touchpad-driver\build\obj\x64\Release\htixtp.tlog\CL.read.1.tlog                   86014
+D:\a\touchpad-driver\touchpad-driver\build\obj\x64\Release\htixtp.tlog\CL.write.1.tlog                  2150
+D:\a\touchpad-driver\touchpad-driver\build\obj\x64\Release\htixtp.tlog\DrvCat.command.1.tlog            658
+D:\a\touchpad-driver\touchpad-driver\build\obj\x64\Release\htixtp.tlog\drvcat.read.1.tlog               252
+D:\a\touchpad-driver\touchpad-driver\build\obj\x64\Release\htixtp.tlog\drvcat.write.1.tlog              300
+D:\a\touchpad-driver\touchpad-driver\build\obj\x64\Release\htixtp.tlog\htixtp.lastbuildstate            347
+D:\a\touchpad-driver\touchpad-driver\build\obj\x64\Release\htixtp.tlog\inf2cat-expand.5540.read.1.tlog  792
+D:\a\touchpad-driver\touchpad-driver\build\obj\x64\Release\htixtp.tlog\inf2cat-expand.5540.write.1.tlog 544
+D:\a\touchpad-driver\touchpad-driver\build\obj\x64\Release\htixtp.tlog\inf2cat-expand.read.1.tlog       792
+D:\a\touchpad-driver\touchpad-driver\build\obj\x64\Release\htixtp.tlog\inf2cat-expand.write.1.tlog      544
+D:\a\touchpad-driver\touchpad-driver\build\obj\x64\Release\htixtp.tlog\Inf2Cat.command.1.tlog           484
+D:\a\touchpad-driver\touchpad-driver\build\obj\x64\Release\htixtp.tlog\inf2cat.read.1.tlog              4212
+D:\a\touchpad-driver\touchpad-driver\build\obj\x64\Release\htixtp.tlog\inf2cat.write.1.tlog             280
+D:\a\touchpad-driver\touchpad-driver\build\obj\x64\Release\htixtp.tlog\link.command.1.tlog              4068
+D:\a\touchpad-driver\touchpad-driver\build\obj\x64\Release\htixtp.tlog\link.read.1.tlog                 2996
+D:\a\touchpad-driver\touchpad-driver\build\obj\x64\Release\htixtp.tlog\link.secondary.1.tlog            284
+D:\a\touchpad-driver\touchpad-driver\build\obj\x64\Release\htixtp.tlog\link.write.1.tlog                838
+D:\a\touchpad-driver\touchpad-driver\build\obj\x64\Release\htixtp.tlog\stampinf.command.1.tlog          550
+D:\a\touchpad-driver\touchpad-driver\build\obj\x64\Release\htixtp.tlog\stampinf.read.1.tlog             258
+D:\a\touchpad-driver\touchpad-driver\build\obj\x64\Release\htixtp.tlog\stampinf.write.1.tlog            258
+D:\a\touchpad-driver\touchpad-driver\build\x64\Release                                                  
+D:\a\touchpad-driver\touchpad-driver\build\x64\Release\htixtp                                           
+D:\a\touchpad-driver\touchpad-driver\build\x64\Release\htixtp.inf                                       2947
+D:\a\touchpad-driver\touchpad-driver\build\x64\Release\htixtp.pdb                                       692224
+D:\a\touchpad-driver\touchpad-driver\build\x64\Release\htixtp.sys                                       46080
+D:\a\touchpad-driver\touchpad-driver\build\x64\Release\htixtp\htixtp.cat                                1635
+D:\a\touchpad-driver\touchpad-driver\build\x64\Release\htixtp\htixtp.inf                                2947
+D:\a\touchpad-driver\touchpad-driver\build\x64\Release\htixtp\htixtp.sys                                46080
+

@@ -1,0 +1,94 @@
+Build started 10/17/2026 8:56:08 AM.
+Logging verbosity is set to: Normal.
+Project "D:\a\touchpad-driver\touchpad-driver\driver\htixtp.vcxproj" on node 1 (Rebuild target(s)).
+CoreClean:
+  Creating directory "D:\a\touchpad-driver\touchpad-driver\driver\..\build\obj\x64\Release\".
+DriverBuildNotifications:
+  Building 'htixtp' with toolset 'WindowsKernelModeDriver10.0' and the 'Windows Driver' target platform.
+  Using KMDF 1.15.
+PrepareForBuild:
+  Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
+  Creating directory "D:\a\touchpad-driver\touchpad-driver\driver\..\build\x64\Release\".
+  Creating directory "D:\a\touchpad-driver\touchpad-driver\driver\..\build\obj\x64\Release\htixtp.tlog\".
+InitializeBuildStatus:
+  Creating "D:\a\touchpad-driver\touchpad-driver\driver\..\build\obj\x64\Release\htixtp.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+  Touching "D:\a\touchpad-driver\touchpad-driver\driver\..\build\obj\x64\Release\htixtp.tlog\unsuccessfulbuild".
+StampInf:
+  D:\a\touchpad-driver\touchpad-driver\packages\Microsoft.Windows.WDK.x64.10.0.28000.2526\c\bin\10.0.28000.0\x64\stampinf.exe -d "*" -a "amd64" -v "*" -k "1.15"  -x -f D:\a\touchpad-driver\touchpad-driver\driver\..\build\obj\x64\Release\htixtp.inf 
+  Copying "D:\a\touchpad-driver\touchpad-driver\driver\htixtp.inx" to "D:\a\touchpad-driver\touchpad-driver\driver\..\build\obj\x64\Release\htixtp.inf" for stamping
+  Stamping D:\a\touchpad-driver\touchpad-driver\driver\..\build\obj\x64\Release\htixtp.inf
+  Stamping [Version] section with DriverVer=10/17/2026,8.56.12.21
+  Copying file from "D:\a\touchpad-driver\touchpad-driver\build\obj\x64\Release\htixtp.inf" to "D:\a\touchpad-driver\touchpad-driver\build\x64\Release\htixtp.inf".
+ClCompile:
+  C:\Program Files\Microsoft Visual Studio\18\Enterprise\VC\Tools\MSVC\14.51.36231\bin\HostX64\x64\CL.exe /c /I"D:\a\touchpad-driver\touchpad-driver\driver\..\build\obj\x64\Release\\" /I"D:\a\touchpad-driver\touchpad-driver\packages\Microsoft.Windows.WDK.x64.10.0.28000.2526\c\Include\10.0.28000.0\km\spb\\1.0" /Zi /nologo /W4 /WX- /diagnostics:column /Ox /Os /Oy- /D _WIN64 /D _AMD64_ /D AMD64 /D _WIN32_WINNT=0x0A00 /D WINVER=0x0A00 /D WINNT=1 /D NTDDI_VERSION=0xA000012 /D _UNICODE /D UNICODE /D POOL_NX_OPTIN=1 /D KMDF_VERSION_MAJOR=1 /D KMDF_VERSION_MINOR=15 /GF /Gm- /Zp8 /GS /guard:cf /Gy /fp:precise /Qspectre /Zc:wchar_t- /Zc:forScope /Zc:inline /GR- /Fo"D:\a\touchpad-driver\touchpad-driver\driver\..\build\obj\x64\Release\\" /Fd"D:\a\touchpad-driver\touchpad-driver\driver\..\build\obj\x64\Release\vc145.pdb" /external:W4 /Gz /wd4603 /wd4627 /wd4986 /wd4987 /FI"D:\a\touchpad-driver\touchpad-driver\packages\Microsoft.Windows.SDK.CPP.10.0.28000.2526\c\Include\10.0.28000.0\shared\warning.h" /FC /errorReport:queue /kernel -cbstring -d2epilogunwind  /d1nodatetime /d1import_no_registry /d2AllowCompatibleILVersions /d2Zi+ htixtp.c hidi2c.c descriptor.c diag.c
+  htixtp.c
+  hidi2c.c
+  descriptor.c
+  diag.c
+  Generating Code...
+Link:
+  C:\Program Files\Microsoft Visual Studio\18\Enterprise\VC\Tools\MSVC\14.51.36231\bin\HostX64\x64\link.exe /ERRORREPORT:QUEUE /OUT:"D:\a\touchpad-driver\touchpad-driver\driver\..\build\x64\Release\htixtp.sys" /VERSION:"10.0" /INCREMENTAL:NO /NOLOGO /WX /SECTION:"INIT,d" "D:\a\touchpad-driver\touchpad-driver\packages\Microsoft.Windows.WDK.x64.10.0.28000.2526\c\lib\10.0.28000.0\km\x64\BufferOverflowFastFailK.lib" "D:\a\touchpad-driver\touchpad-driver\packages\Microsoft.Windows.WDK.x64.10.0.28000.2526\c\lib\10.0.28000.0\km\x64\ntoskrnl.lib" "D:\a\touchpad-driver\touchpad-driver\packages\Microsoft.Windows.WDK.x64.10.0.28000.2526\c\lib\10.0.28000.0\km\x64\hal.lib" "D:\a\touchpad-driver\touchpad-driver\packages\Microsoft.Windows.WDK.x64.10.0.28000.2526\c\lib\10.0.28000.0\km\x64\wmilib.lib" "D:\a\touchpad-driver\touchpad-driver\packages\Microsoft.Windows.WDK.x64.10.0.28000.2526\c\lib\wdf\kmdf\x64\1.15\WdfLdr.lib" "D:\a\touchpad-driver\touchpad-driver\packages\Microsoft.Windows.WDK.x64.10.0.28000.2526\c\lib\wdf\kmdf\x64\1.15\WdfDriverEntry.lib" /NODEFAULTLIB /MANIFEST:NO /DEBUG /PDB:"D:\a\touchpad-driver\touchpad-driver\driver\..\build\x64\Release\htixtp.pdb" /SUBSYSTEM:NATIVE,"10.00" /Driver /OPT:REF /OPT:ICF /ENTRY:"FxDriverEntry" /RELEASE /IMPLIB:"D:\a\touchpad-driver\touchpad-driver\driver\..\build\x64\Release\htixtp.lib" /MERGE:"_TEXT=.text;_PAGE=PAGE" /MACHINE:X64 /PROFILE /guard:cf /kernel /IGNORE:4198,4010,4037,4039,4065,4070,4078,4087,4089,4221,4108,4088,4218,4218,4235 /osversion:10.0 /pdbcompress /debugtype:pdata "D:\a\touchpad-driver\touchpad-driver\driver\..\build\obj\x64\Release\htixtp.obj"
+  "D:\a\touchpad-driver\touchpad-driver\driver\..\build\obj\x64\Release\hidi2c.obj"
+  "D:\a\touchpad-driver\touchpad-driver\driver\..\build\obj\x64\Release\descriptor.obj"
+  "D:\a\touchpad-driver\touchpad-driver\driver\..\build\obj\x64\Release\diag.obj"
+  htixtp.vcxproj -> D:\a\touchpad-driver\touchpad-driver\build\x64\Release\htixtp.sys
+ApiValidator:
+  Validating 'Windows Driver' driver using ApiValidator.exe
+  cmd.exe /D /C "C:\Users\runneradmin\AppData\Local\Temp\MSBuildTemp47571ea3970c417d844b7aba2e7cc8f8\tmp3aded3299f9b442695740b5ed853c877.cmd"
+  "D:\a\touchpad-driver\touchpad-driver\packages\Microsoft.Windows.WDK.x64.10.0.28000.2526\c\bin\10.0.28000.0\x64\ApiValidator.exe" -DriverPackagePath:D:\a\touchpad-driver\touchpad-driver\driver\..\build\x64\Release\htixtp.sys -SupportedApiXmlFiles:D:\a\touchpad-driver\touchpad-driver\packages\Microsoft.Windows.WDK.x64.10.0.28000.2526\c\build\10.0.28000.0\universalDDIs\x64\UniversalDDIs.xml -ModuleWhiteListXmlFiles:D:\a\touchpad-driver\touchpad-driver\packages\Microsoft.Windows.WDK.x64.10.0.28000.2526\c\build\10.0.28000.0\universalDDIs\x64\ModuleWhiteList.xml -ApiExtractorExePath:D:\a\touchpad-driver\touchpad-driver\packages\Microsoft.Windows.WDK.x64.10.0.28000.2526\c\bin\10.0.28000.0\x64 
+  Driver is 'Windows Driver'.
+DriverPackageTarget:
+  Packaging up the following projects for the following configurations:
+  
+   Configuration='' Platform=''
+  
+  
+  The following files will be packaged:
+  
+  File to package:      D:\a\touchpad-driver\touchpad-driver\build\x64\Release\htixtp.sys.
+  Location in Package:  \htixtp.sys.
+  Requested by project: 
+  
+  
+  File to package:      D:\a\touchpad-driver\touchpad-driver\driver\..\build\obj\x64\Release\htixtp.inf.
+  Location in Package:  \htixtp.inf.
+  Requested by project: 
+  
+  
+  Creating directory "D:\a\touchpad-driver\touchpad-driver\driver\..\build\x64\Release\htixtp".
+  Creating directory "D:\a\touchpad-driver\touchpad-driver\driver\..\build\x64\Release\htixtp".
+  Copying file from "D:\a\touchpad-driver\touchpad-driver\build\obj\x64\Release\htixtp.inf" to "D:\a\touchpad-driver\touchpad-driver\build\x64\Release\htixtp\htixtp.inf".
+  Copying file from "D:\a\touchpad-driver\touchpad-driver\build\x64\Release\htixtp.sys" to "D:\a\touchpad-driver\touchpad-driver\build\x64\Release\htixtp\htixtp.sys".
+Inf2Cat:
+  D:\a\touchpad-driver\touchpad-driver\packages\Microsoft.Windows.WDK.x64.10.0.28000.2526\c\bin\10.0.28000.0\x86\inf2cat.exe /os:10_x64 /driver:D:\a\touchpad-driver\touchpad-driver\driver\..\build\x64\Release\htixtp\ 
+  ........................
+  Signability test complete.
+  
+  Errors:
+  None
+  
+  Warnings:
+  None
+  
+  Catalog generation complete.
+  D:\a\touchpad-driver\touchpad-driver\build\x64\Release\htixtp\htixtp.cat
+DrvCat:
+  D:\a\touchpad-driver\touchpad-driver\packages\Microsoft.Windows.WDK.x64.10.0.28000.2526\c\bin\10.0.28000.0\x64\drvcat.exe  D:\a\touchpad-driver\touchpad-driver\driver\..\build\x64\Release\htixtp\htixtp.cat /set WdkVersion 10.0.28000.0 /set WdkAssemblyVersion 10.0.28000.2526 
+  Set catalog attribute.
+  WdkVersion: 10.0.28000.0
+  Set catalog attribute.
+  WdkAssemblyVersion: 10.0.28000.2526
+FinalizeBuildStatus:
+  Deleting file "D:\a\touchpad-driver\touchpad-driver\driver\..\build\obj\x64\Release\htixtp.tlog\unsuccessfulbuild".
+  Touching "D:\a\touchpad-driver\touchpad-driver\driver\..\build\obj\x64\Release\htixtp.tlog\htixtp.lastbuildstate".
+Done Building Project "D:\a\touchpad-driver\touchpad-driver\driver\htixtp.vcxproj" (Rebuild target(s)).
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+FileLogger wrote to: D:\a\touchpad-driver\touchpad-driver\out\logs\build.log
+FileLogger wrote to: D:\a\touchpad-driver\touchpad-driver\out\logs\errors.log
+FileLogger wrote to: D:\a\touchpad-driver\touchpad-driver\out\logs\warnings.log
+
+Time Elapsed 00:00:11.65
