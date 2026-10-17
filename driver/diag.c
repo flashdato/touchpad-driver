@@ -133,7 +133,7 @@ HtpReadSettings(
     /* Defaults */
     Ctx->HidDescAddress       = 0x20;     /* from the laptop's ACPI _DSM for TPD0 */
     Ctx->DescriptorModeConfig = HTP_MODE_AUTO;
-    Ctx->PollingConfig        = HTP_POLL_OFF;
+    Ctx->PollingConfig        = HTP_POLL_BOTH;   /* the chip's interrupt line never fires here; always poll too */
     Ctx->PollIntervalMs       = 8;
     Ctx->HealthCheckMs        = 5000;
     Ctx->SleepOnSuspend       = 0;

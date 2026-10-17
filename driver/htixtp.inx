@@ -45,6 +45,19 @@ Needs     = MsHidKmdf.NT
 [htixtp_Inst.NT.HW]
 Include   = MsHidKmdf.inf
 Needs     = MsHidKmdf.NT.HW
+AddReg    = htixtp_HwAddReg
+
+; Device Parameters for this device. The power-management values keep Windows
+; from idle-suspending the touchpad: this chip wedges on a power transition
+; (the same reason Linux marks it I2C_HID_QUIRK_NO_RUNTIME_PM), after which it
+; stays on the bus but NACKs every command until its power is physically cut.
+[htixtp_HwAddReg]
+HKR,,"EnhancedPowerManagementEnabled",0x00010001,0
+HKR,,"SelectiveSuspendEnabled",0x00010001,0
+HKR,,"SelectiveSuspendTimeout",0x00010001,0
+HKR,,"D3ColdSupported",0x00010001,0
+HKR,,"AllowIdleIrpInD3",0x00010001,0
+HKR,,"WdfDirectedPowerTransitionEnable",0x00010001,0
 
 [htixtp_Inst.NT.Services]
 Include    = MsHidKmdf.inf
