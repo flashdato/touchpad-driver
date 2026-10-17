@@ -1,0 +1,81 @@
+;
+; htixtp.inf - HID over I2C driver for the Hantick 0911:5288 touchpad
+;              (ACPI SYNA3602, shown by Windows as ACPI\SYNA360).
+;
+; Replaces the inbox hidi2c.sys for this device only. The device stack is
+;   HIDClass / mshidkmdf.sys (Microsoft pass-through) -> htixtp.sys (lower filter) -> ACPI
+; which is Microsoft's documented pattern for KMDF HID minidrivers.
+; Requires Windows 11 (MsHidKmdf.inf ships with build 22000 and later).
+;
+
+[Version]
+Signature   = "$WINDOWS NT$"
+Class       = HIDClass
+ClassGuid   = {745a17a0-74d3-11d0-b6fe-00a0c90f57da}
+Provider    = %ProviderString%
+DriverVer   = 10/17/2026,1.0.0.0
+CatalogFile = htixtp.cat
+PnpLockdown = 1
+
+[DestinationDirs]
+DefaultDestDir = 13
+
+[SourceDisksNames]
+1 = %DiskDesc%,,,
+
+[SourceDisksFiles]
+htixtp.sys = 1
+
+[Manufacturer]
+%ManufacturerString% = TouchpadFix,NT$ARCH$.10.0...22000
+
+[TouchpadFix.NT$ARCH$.10.0...22000]
+%DeviceDesc% = htixtp_Inst, ACPI\VEN_SYN&DEV_A360
+%DeviceDesc% = htixtp_Inst, ACPI\SYNA360
+%DeviceDesc% = htixtp_Inst, ACPI\VEN_SYNA&DEV_3602
+%DeviceDesc% = htixtp_Inst, ACPI\SYNA3602
+%DeviceDesc% = htixtp_Inst, ACPI\VEN_HTIX&DEV_5288
+%DeviceDesc% = htixtp_Inst, ACPI\HTIX5288
+
+[htixtp_Inst.NT]
+CopyFiles = htixtp_CopyFiles
+Include   = MsHidKmdf.inf
+Needs     = MsHidKmdf.NT
+
+[htixtp_Inst.NT.HW]
+Include   = MsHidKmdf.inf
+Needs     = MsHidKmdf.NT.HW
+
+[htixtp_Inst.NT.Services]
+Include    = MsHidKmdf.inf
+Needs      = MsHidKmdf.NT.Services
+AddService = htixtp,0,htixtp_Service_Inst
+
+[htixtp_Inst.NT.Filters]
+AddFilter = htixtp,,htixtp_Filter_Install
+
+[htixtp_Filter_Install]
+FilterPosition = Lower
+
+[htixtp_Service_Inst]
+DisplayName   = %ServiceDesc%
+ServiceType   = 1               ; SERVICE_KERNEL_DRIVER
+StartType     = 3               ; SERVICE_DEMAND_START
+ErrorControl  = 1               ; SERVICE_ERROR_NORMAL
+ServiceBinary = %13%\htixtp.sys
+
+[htixtp_Inst.NT.Wdf]
+KmdfService = htixtp, htixtp_wdfsect
+
+[htixtp_wdfsect]
+KmdfLibraryVersion = $KMDFVERSION$
+
+[htixtp_CopyFiles]
+htixtp.sys
+
+[Strings]
+ProviderString     = "TouchpadFix"
+ManufacturerString = "TouchpadFix"
+DeviceDesc         = "I2C HID touchpad (Hantick 0911:5288, htixtp)"
+ServiceDesc        = "Hantick I2C touchpad driver (htixtp)"
+DiskDesc           = "TouchpadFix driver package"

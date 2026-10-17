@@ -1,0 +1,37 @@
+name: Build driver
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: windows-2025-vs2026
+    steps:
+      - name: Check out
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Restore WDK and SDK (NuGet)
+        run: nuget restore .\packages.config -PackagesDirectory .\packages\
+
+      - name: Build, sign and package
+        shell: pwsh
+        run: .\ci\build.ps1 -Configuration Release
+
+      - name: Upload TouchpadFix package
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: TouchpadFix
+          path: out/TouchpadFix
+          if-no-files-found: error
+
+      - name: Upload build logs
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: build-logs
+          path: out/logs
