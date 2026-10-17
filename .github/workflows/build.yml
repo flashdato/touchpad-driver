@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   build:
@@ -35,3 +35,26 @@ jobs:
         with:
           name: build-logs
           path: out/logs
+
+      # Also publish the package and logs to the 'dist' branch, so they can be
+      # fetched with plain git (and downloaded from the repo page as a zip).
+      - name: Publish to the dist branch
+        if: always()
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $stage = Join-Path $env:RUNNER_TEMP 'dist'
+          New-Item -ItemType Directory -Force -Path $stage | Out-Null
+          if (Test-Path out) { Copy-Item -Path out\* -Destination $stage -Recurse -Force }
+          "source commit: $env:GITHUB_SHA`nrun: $env:GITHUB_RUN_ID`nresult: $env:JOB_STATUS" | Out-File (Join-Path $stage 'BUILD_INFO.txt') -Encoding utf8
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout --orphan dist-staging
+          git rm -r -q --cached .
+          Get-ChildItem -Force | Where-Object { $_.Name -ne '.git' } | Remove-Item -Recurse -Force
+          Copy-Item -Path "$stage\*" -Destination . -Recurse -Force
+          git add -A
+          git commit -q -m "Build output for $env:GITHUB_SHA"
+          git push -f origin HEAD:dist
+        env:
+          JOB_STATUS: ${{ job.status }}
