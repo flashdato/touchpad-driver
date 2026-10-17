@@ -115,6 +115,21 @@ function Restart-Touchpad($Tp) {
     Start-Sleep -Seconds 4
 }
 
+function Get-TouchpadChildren($Tp) {
+    return @(Get-PnpDevice -ErrorAction SilentlyContinue | Where-Object { $_.InstanceId -like 'HID\*' } |
+             Where-Object { (Get-DevProp $_.InstanceId 'DEVPKEY_Device_Parent') -eq $Tp.InstanceId })
+}
+
+# Re-enable touchpad collections that were disabled earlier (e.g. the Input Configuration device).
+function Enable-TouchpadChildren($Tp) {
+    foreach ($k in (Get-TouchpadChildren $Tp)) {
+        if ($k.Present -and (Get-ProblemCode $k) -eq 22) {
+            Write-Line "Re-enabling $($k.FriendlyName) [$($k.InstanceId)]"
+            Enable-PnpDevice -InstanceId $k.InstanceId -Confirm:$false -ErrorAction SilentlyContinue
+        }
+    }
+}
+
 function Set-DeviceParam($Tp, [string]$Name, [int]$Number) {
     $path = Get-ParamsPath $Tp
     if (-not (Test-Path $path)) { New-Item -Path $path -Force | Out-Null }
@@ -244,8 +259,9 @@ function Invoke-Install {
     # Keep Fast Startup off: every power-on must be a real cold start for the chip.
     Set-ItemProperty -Path 'HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Power' -Name HiberbootEnabled -Value 0 -Type DWord
 
-    Start-Sleep -Seconds 3
+    Start-Sleep -Seconds 5
     $tp = Get-Touchpad
+    Enable-TouchpadChildren $tp
     Write-Good 'Driver installed.'
     Write-Line ("Device status now: {0} (problem code {1}); our driver active: {2}" -f $tp.Status, (Get-ProblemCode $tp), (Test-OurDriver $tp))
 
@@ -273,8 +289,7 @@ function Show-Status([int]$LogLines = 25) {
     if ($ours) { Write-Good "Driver: TouchpadFix htixtp ($infName, version $version)" }
     else       { Write-Note "Driver: $provider $infName $version  (NOT the TouchpadFix driver yet)" }
 
-    $kids = @(Get-PnpDevice -ErrorAction SilentlyContinue | Where-Object { $_.Present -and $_.InstanceId -like 'HID\*' } |
-              Where-Object { (Get-DevProp $_.InstanceId 'DEVPKEY_Device_Parent') -eq $tp.InstanceId })
+    $kids = @(Get-TouchpadChildren $tp | Where-Object { $_.Present })
     foreach ($k in $kids) {
         Write-Line ("  {0,-6} code {1,-3} {2}" -f $k.Status, (Get-ProblemCode $k), $k.FriendlyName)
     }
@@ -491,6 +506,8 @@ function Invoke-Mode([string]$Which) {
     Set-DeviceParam $tp 'HtpAutoMouse' 0
     Write-Good "Mode set to $Which."
     Restart-Touchpad $tp
+    Start-Sleep -Seconds 2
+    Enable-TouchpadChildren $tp
     Show-Status 12 | Out-Null
 }
 

@@ -515,7 +515,7 @@ HtpEvtInterruptIsr(
 
     if (!ctx->InD0 || !ctx->DeviceReady) {
         /* Level-triggered line and a chip we can't talk to yet: don't spin. */
-        HtpSleepMs(5);
+        HtpSleepMs(10);
         return TRUE;
     }
 
@@ -554,11 +554,7 @@ HtpRecover(
     InterlockedIncrement(&Ctx->Stats.Recoveries);
     HtpSetState(Ctx, HtpStateRecovering);
 
-    /* Keep a stuck level-triggered line from hammering the ISR while we work. */
-    if (Ctx->Interrupt != NULL && InterlockedCompareExchange(&Ctx->InterruptDisabledByUs, 1, 0) == 0) {
-        WdfInterruptDisable(Ctx->Interrupt);
-    }
-
+    /* The interrupt stays connected; the ISR backs off by itself while DeviceReady is 0. */
     status = HtpInitializeChip(Ctx, Ctx->WakeTimeoutMs, TRUE);
     if (!NT_SUCCESS(status)) {
         HtpLog(Ctx, L"recovery failed (0x%08X); next try in %u ms", (ULONG)status, Ctx->RecoveryBackoffMs);
@@ -584,11 +580,6 @@ HtpRecover(
         HtpApplyMouseMode(Ctx);
     } else {
         HtpReplaySavedFeatures(Ctx);
-    }
-
-    if (Ctx->Interrupt != NULL && Ctx->InD0 &&
-        InterlockedCompareExchange(&Ctx->InterruptDisabledByUs, 0, 1) == 1) {
-        WdfInterruptEnable(Ctx->Interrupt);
     }
 
     HtpLog(Ctx, L"recovered");

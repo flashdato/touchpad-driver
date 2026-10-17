@@ -329,6 +329,10 @@ HtpLoadDescriptorCache(
         if (NT_SUCCESS(status) && type == REG_BINARY && length == expected) {
             Ctx->CacheReportDescLength = length;
             Ctx->CacheLoaded = TRUE;
+            /* Register addresses from the last good start: lets the wake loop send SET_POWER(ON) early. */
+            if (Ctx->CommandRegister == 0) {
+                (VOID)HtpParseHidDescriptor(Ctx, Ctx->CacheHidDesc, TRUE);
+            }
         }
     }
 
